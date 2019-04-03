@@ -10,7 +10,12 @@ pipeline {
             
            steps {
                 echo 'Deploying the built lah'
+               withSonarQubeEnv('SonarQube') {
+                    // some block
+                }
             }
         }
     }
 }
+
+
