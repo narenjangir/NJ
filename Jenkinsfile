@@ -1,21 +1,14 @@
-pipeline {
-    agent none
-    stages {
-        stage('Example Build') {
-            steps {
-                echo 'Hello World'
-            }
+stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'SonarQubeScanner'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
         }
-        stage('Example Deploy') {
-            
-           steps {
-                echo 'Deploying the built lah'
-               withSonarQubeEnv('SonarQube') {
-                    // some block
-                }
-            }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
         }
     }
 }
-
 
