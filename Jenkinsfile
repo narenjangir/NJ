@@ -14,7 +14,8 @@ pipeline
     }
 }*/
 stage('Artifactory') {
-        rtUpload (
+    steps{
+       rtUpload (
     serverId: "Artifactory",
     spec:
         """{
@@ -26,5 +27,5 @@ stage('Artifactory') {
          ]
         }"""
 )
-}
+    } }
     }}
